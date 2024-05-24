@@ -11,6 +11,7 @@ import torch.nn.functional as F
 from typing import Optional, Tuple, Type
 from .unet import Unet_encoder
 
+
 class MLPBlock(nn.Module):
     def __init__(
             self,
@@ -26,7 +27,9 @@ class MLPBlock(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.lin2(self.act(self.lin1(x)))
 
-
+# 3D的Layer Normalization
+# u: 计算通道维度的均值
+# s: 计算在通道维度上的方差
 class LayerNorm3d(nn.Module):
     def __init__(self, num_channels: int, eps: float = 1e-6) -> None:
         super().__init__()
